@@ -243,7 +243,9 @@ export function parseStreamInfo(url: string, data: string): StreamInfo | undefin
 
 export async function loadIssues(props?: { labels: string | string[] }) {
   const CustomOctokit = Octokit.plugin(paginateRest, restEndpointMethods)
-  const octokit = new CustomOctokit()
+  const octokit = new CustomOctokit({
+    auth: process.env.GITHUB_TOKEN
+  })
 
   let labels = ''
   if (props && props.labels) {

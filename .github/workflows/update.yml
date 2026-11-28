@@ -28,6 +28,8 @@ jobs:
         run: npm install
       - name: Update internal playlists
         id: playlist-update
+        env:
+          GITHUB_TOKEN: ${{ steps.create-app-token.outputs.token || secrets.GITHUB_TOKEN }}
         run: |
           npm run playlist:update
           echo "processed_issues=$(cat temp/logs/playlist_update.log)" >> $GITHUB_OUTPUT
